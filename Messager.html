@@ -1,0 +1,78 @@
+<head>
+    <script type="text/javascript">
+      // setResolution call has to be made in the head section!
+      if(!!navigator.setResolution)
+        navigator.setResolution(1280,720);
+      window.onerror = function(errorMsg, url, lineNumber){
+       // Application decision logic to perform error reporting or take corrective action
+       return true;
+     };
+
+      window.onload = function(){
+        showId = Channel.getCurrentChannel();
+        console.log("AWL");
+      }
+    </script>
+ </head>
+
+<body >
+  <div class="container">
+    <header>
+     <!--<label class="hide-completed">
+        <input type="checkbox" checked="{{hideCompleted}}" />
+        {{#if hideCompleted}}
+        Currently Watched Show
+        {{else}}
+        Public Shows
+        {{/if}}
+      </label>-->
+      <h1> Jeffrey's Message Board ({{incompleteCount}})</h1>
+        <form class="new-task">
+          <input type="text" name="text" placeholder="Type to Comment" />
+        </form>
+    </header>
+
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<!--<template name="like">
+<h2> Likes: ({{getLikes}})</h2>
+</template>
+
+<template name="LButtons">
+  <div id = "likes">
+          <button class="toggle-likes">
+              Like!
+          </button>
+          <button class="toggle-dislikes">
+              Dislike!
+        </button>
+    </div>
+</template>-->
+<template name="like">
+  <div>
+  <li>
+      
+      <button class="toggle-dislikes">
+        Dislike
+      </button>
+    <span class="text"><strong>{{likes}}</strong> - {{dislikes}}</span>
+  </li>
+  </div>
+</template>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <button class="delete">&times;</button>
+    <button class="toggle-likes">
+        Upvote
+    </button>
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+    <span class="text"><strong>{{text}}</strong> - {{createdAt}} <br/> Score: {{likes}}</span>
+  </li>
+</template>
